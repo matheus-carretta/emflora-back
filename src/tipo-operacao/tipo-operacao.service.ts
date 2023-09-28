@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnprocessableEntityException } from '@nestjs/common';
 import { PrismaService } from 'prisma/prisma.service';
 
 @Injectable()
@@ -29,6 +29,17 @@ export class TipoOperacaoService {
   }
 
   async remove(id: number) {
+    const tipoEstaEmUso = await this.prisma.tipoOperacao.findUnique({
+      where: { id },
+      include: { operacoes: true },
+    });
+
+    if (tipoEstaEmUso.operacoes.length > 0) {
+      throw new UnprocessableEntityException(
+        'Este tipo de operação está sendo utilizado',
+      );
+    }
+
     return this.prisma.tipoOperacao.delete({
       where: { id },
     });

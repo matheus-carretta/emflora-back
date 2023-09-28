@@ -9,15 +9,17 @@ export class OperacaoService {
   constructor(
     private prisma: PrismaService,
     private tipoOperacaoService: TipoOperacaoService,
-  ){}
+  ) {}
 
   async create(operacaoDto: OperacaoDto): Promise<Operacao> {
-    const tipoOperacao = await this.tipoOperacaoService.findOne(operacaoDto.tipoOperacaoId)
+    const tipoOperacao = await this.tipoOperacaoService.findOne(
+      operacaoDto.tipoOperacaoId,
+    );
 
     if (!tipoOperacao) {
-      throw new NotFoundException('Código de operação inexistente')
+      throw new NotFoundException('Código de operação inexistente');
     }
-    
+
     const createdOperacao = await this.prisma.operacao.create({
       data: operacaoDto,
     });
@@ -25,7 +27,7 @@ export class OperacaoService {
   }
 
   async findAll(): Promise<Operacao[]> {
-    return this.prisma.operacao.findMany();
+    return this.prisma.operacao.findMany({ include: { tipoOperacao: true } });
   }
 
   async findOne(id: number): Promise<Operacao> {
