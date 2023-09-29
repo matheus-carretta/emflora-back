@@ -42,4 +42,9 @@ export class OperacaoController {
   async remove(@Param('id') id: string): Promise<void> {
     return this.operacaoService.remove(+id);
   }
+
+  @Get('status')
+  async status() {
+    return 'online';
+  }
 }
