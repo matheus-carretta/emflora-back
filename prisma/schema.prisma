@@ -17,9 +17,6 @@ model Operacao {
   id             Int          @id @default(autoincrement())
   codigo         String       @unique
   nome           String       @unique
-  valorUnitario  Float
-  rendPrincipal  Float
-  rendSuporte    Float?
   tipoOperacao   TipoOperacao @relation(fields: [tipoOperacaoId], references: [id])
   tipoOperacaoId Int
 }

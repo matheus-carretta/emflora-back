@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString, IsOptional } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class OperacaoDto {
   @IsNotEmpty()
@@ -8,18 +8,6 @@ export class OperacaoDto {
   @IsNotEmpty()
   @IsString()
   nome: string;
-
-  @IsNotEmpty()
-  @IsNumber()
-  valorUnitario: number;
-
-  @IsNotEmpty()
-  @IsNumber()
-  rendPrincipal: number;
-
-  @IsOptional()
-  @IsNumber()
-  rendSuporte?: number;
 
   @IsNotEmpty()
   @IsNumber()
