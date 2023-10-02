@@ -25,3 +25,8 @@ model MetodoTalhao {
   id     Int    @id @default(autoincrement())
   metodo String @unique
 }
+
+model Fazenda {
+  id   Int    @id @default(autoincrement())
+  nome String
+}
