@@ -20,3 +20,8 @@ model Operacao {
   tipoOperacao   TipoOperacao @relation(fields: [tipoOperacaoId], references: [id])
   tipoOperacaoId Int
 }
+
+model MetodoTalhao {
+  id     Int    @id @default(autoincrement())
+  metodo String @unique
+}
